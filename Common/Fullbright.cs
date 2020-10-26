@@ -4,7 +4,7 @@ namespace PhasmoMonoCheat.Common
 {
     class Fullbright
     {
-        public static void Enable()
+        public static void Enable(Light light, Transform boneTransform)
         {
             light = boneTransform.gameObject.AddComponent<Light>();
             light.color = Color.white;
@@ -15,12 +15,9 @@ namespace PhasmoMonoCheat.Common
             light.intensity = 0.3f;
         }
 
-        public static void Disable()
+        public static void Disable(Light light)
         {
-            UnityEngine.Object.Destroy(Main.myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>());
+            UnityEngine.Object.Destroy(light);
         }
-
-        private static Transform boneTransform = Main.myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head);
-        private static Light light = boneTransform.GetComponent<Light>();
     }
 }

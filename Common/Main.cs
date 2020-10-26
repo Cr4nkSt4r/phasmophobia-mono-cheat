@@ -32,10 +32,15 @@ namespace PhasmoMonoCheat
             if (myPlayer != null)
             {
                 var main = Camera.main;
+                var boneTransform = myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head);
+                var light = boneTransform.GetComponent<Light>();
 
                 if (CheatToggles.enableBasicInformations == true)
                 {
                     BasicInformations.Enable();
+                }
+                else
+                {
                 }
 
                 if (CheatToggles.enableEsp == true)
@@ -51,12 +56,13 @@ namespace PhasmoMonoCheat
                 if (CheatToggles.enableFullbright == true)
                 {
                     GUI.Label(new Rect(10f, 175f, 100f, 50f), "<b><color=#A302B5>Fullbright:</color> <color=#00C403>On</color></b>");
-                    Fullbright.Enable();
+                    Fullbright.Enable(light, boneTransform);
                 }
                 else
                 {
                     GUI.Label(new Rect(10f, 175f, 100f, 50f), "<b><color=#A302B5>Fullbright:</color> <color=#C40000>Off</color></b>");
-                    Fullbright.Disable();
+                    //UnityEngine.Object.Destroy(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>());
+                    Fullbright.Disable(light);
                 }
             }
         }
@@ -95,9 +101,38 @@ namespace PhasmoMonoCheat
                 CheatToggles.enableBasicInformations = !CheatToggles.enableBasicInformations;
                 con.WriteLine("[+] Basic informations: Toggled " + (CheatToggles.enableBasicInformations ? "On" : "Off"));
             }
+            if (keyboard.rightArrowKey.wasPressedThisFrame)
+            {
+                CheatToggles.enableDebug = !CheatToggles.enableDebug;
+                con.WriteLine("[+] Debugging: Toggled " + (CheatToggles.enableDebug ? "On" : "Off"));
+                DebugC.PrintObjects();
+            }
+            if (keyboard.insertKey.wasPressedThisFrame)
+            {
+                CheatToggles.enableTrolling = !CheatToggles.enableTrolling;
+                con.WriteLine("[+] Trolling: Toggled " + (CheatToggles.enableTrolling ? "On" : "Off"));
+                var executed = 0;
+                if (executed <= 0)
+                {
+                    PhotonNetwork.SetMasterClient(GameController.instance.myPlayer.photonPlayer);
+                    Thread.Sleep(1000);
+                    executed++;
+                } 
+                else if (executed >= 2)
+                {
+                    con.WriteLine("[+] Start Hunting...");
+                    Trolling.StartHunting();
+                }
+                else
+                {
+                    executed++;
+                } 
+            }
             if (keyboard.deleteKey.wasPressedThisFrame)
             {
                 con.WriteLine("[+] Unloading");
+                if(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>() != null)
+                    Destroy(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>());
                 Loader.Unload();
             }
 
