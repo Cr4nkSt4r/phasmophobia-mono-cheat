@@ -11,8 +11,16 @@ namespace PhasmoMonoCheat.Common
             GUI.Label(new Rect(10f, 2f, 300f, 50f), "<color=#00FF00><b>Ghost Name:</b> " + Main.ghostAI.ghostInfo.ghostTraits.ghostName.ToString() + " - " + Main.ghostAI.ghostInfo.ghostTraits.ghostAge.ToString() + "</color>");
             GUI.Label(new Rect(10f, 17f, 300f, 50f), "<color=#00FF00><b>Ghost Type:</b> " + Main.ghostAI.ghostInfo.ghostTraits.ghostType.ToString() + "</color>");
             GUI.Label(new Rect(10f, 62f, 400f, 50f), "<color=#00FF00><b>Responds to:</b> " + (Main.ghostAI.ghostInfo.ghostTraits.isShy ? "People that are alone" : "Everyone") + "</color>");
-            GUI.Label(new Rect(10f, 77f, 300f, 50f), "<color=#00FF00><b>My Insanity:</b> " + Math.Round(100 - Main.myPlayer.insanity, 0) + "</color>");
+            GUI.Label(new Rect(10f, 77f, 300f, 50f), "<color=#00FF00><b>My Sanity:</b> " + Math.Round(100 - Main.myPlayer.insanity, 0) + "</color>");
 
+            var counter = 1;
+            foreach (PlayerData player in GameController.instance.playersData)
+            {
+                if(player != null && !player.player.isDead)
+                    GUI.Label(new Rect(10f, 175f + (counter * 15f), 300f, 50f), "<color=#00FF00><b>" + player.playerName + " Sanity:</b> " + Math.Round(100 - player.player.insanity, 0) + "</color>");
+                counter++;
+            }
+        
             switch (Main.ghostAI.ghostInfo.ghostTraits.ghostType)
             {
                 case GhostTraits.Type.Spirit:

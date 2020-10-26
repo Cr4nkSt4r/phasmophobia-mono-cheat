@@ -32,10 +32,15 @@ namespace PhasmoMonoCheat
             if (myPlayer != null)
             {
                 var main = Camera.main;
+                var boneTransform = myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head);
+                var light = boneTransform.GetComponent<Light>();
 
                 if (CheatToggles.enableBasicInformations == true)
                 {
                     BasicInformations.Enable();
+                }
+                else
+                {
                 }
 
                 if (CheatToggles.enableEsp == true)
@@ -51,12 +56,13 @@ namespace PhasmoMonoCheat
                 if (CheatToggles.enableFullbright == true)
                 {
                     GUI.Label(new Rect(10f, 175f, 100f, 50f), "<b><color=#A302B5>Fullbright:</color> <color=#00C403>On</color></b>");
-                    Fullbright.Enable();
+                    Fullbright.Enable(light, boneTransform);
                 }
                 else
                 {
                     GUI.Label(new Rect(10f, 175f, 100f, 50f), "<b><color=#A302B5>Fullbright:</color> <color=#C40000>Off</color></b>");
-                    Fullbright.Disable();
+                    //UnityEngine.Object.Destroy(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>());
+                    Fullbright.Disable(light);
                 }
             }
         }
@@ -98,6 +104,8 @@ namespace PhasmoMonoCheat
             if (keyboard.deleteKey.wasPressedThisFrame)
             {
                 con.WriteLine("[+] Unloading");
+                if(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>() != null)
+                    UnityEngine.Object.Destroy(myPlayer.charAnim.GetBoneTransform(HumanBodyBones.Head).GetComponent<Light>());
                 Loader.Unload();
             }
 
