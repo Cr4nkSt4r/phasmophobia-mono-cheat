@@ -112,16 +112,16 @@ namespace PhasmoMonoCheat
                 CheatToggles.enableTrolling = !CheatToggles.enableTrolling;
                 con.WriteLine("[+] Trolling: Toggled " + (CheatToggles.enableTrolling ? "On" : "Off"));
                 var executed = 0;
-                if (executed <= 0)
+                if (executed >= 2)
+                {
+                    con.WriteLine("[+] Start Hunting...");
+                    Trolling.StartHunting();
+                }
+                else if (executed == 0)
                 {
                     PhotonNetwork.SetMasterClient(GameController.instance.myPlayer.photonPlayer);
                     Thread.Sleep(1000);
                     executed++;
-                } 
-                else if (executed >= 2)
-                {
-                    con.WriteLine("[+] Start Hunting...");
-                    Trolling.StartHunting();
                 }
                 else
                 {

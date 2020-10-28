@@ -6,17 +6,15 @@ namespace PhasmoMonoCheat.Common
     {
         public static void StartHunting()
         {
-            GhostAI.isHunting = true;
-            GhostAI.canAttack = true;
-            GhostAI.canEnterHuntingMode = true;
-            GhostAI.ghostIsAppeared = true;
-            GhostAI.isChasingPlayer = true;
-            GhostAI.canWander = true;
-            GhostAI.playerToKill = null;
-            GhostAI.ChasingPlayer(true);
-            GhostAI.ChangeState(GhostAI.States.hunting, null, null);
+            Main.ghostAI.isHunting = true;
+            Main.ghostAI.canAttack = true;
+            Main.ghostAI.canEnterHuntingMode = true;
+            Main.ghostAI.ghostIsAppeared = true;
+            Main.ghostAI.isChasingPlayer = true;
+            Main.ghostAI.canWander = true;
+            Main.ghostAI.playerToKill = null;
+            Main.ghostAI.ChasingPlayer(true);
+            Main.ghostAI.ChangeState(GhostAI.States.hunting, null, null);
         }
-
-        private static GhostAI GhostAI;
     }
 }
