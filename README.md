@@ -1,4 +1,7 @@
-# Phasmophobia Mono Cheat
+# (Outdated) Phasmophobia Mono Cheat
+
+Since the halloween 2020 update, this will not work anymore.  
+New version: [Phasmophobia MelonLoader Mod](https://github.com/Cr4nkSt4r/phasmophobia-melon-mod)
 
 Just an private project to learn some basic programming of Unreal Engine mono cheats.  
 Release -> x64 will generate the `obj\x64\Release\PhasmoMonoCheat.dll`,  
