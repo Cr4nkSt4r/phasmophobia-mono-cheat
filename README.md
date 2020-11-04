@@ -1,4 +1,4 @@
-# (Outdated) Phasmophobia Mono Cheat
+# Phasmophobia Mono Cheat - Outdated
 
 Since the halloween 2020 update, this will not work anymore.  
 New version: [Phasmophobia MelonLoader Mod](https://github.com/Cr4nkSt4r/phasmophobia-melon-mod)
